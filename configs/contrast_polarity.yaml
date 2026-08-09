@@ -1,0 +1,32 @@
+experiment: contrast_polarity
+base: main.yaml
+hardware:
+  accelerator: a100
+  devices: 4
+  memory_gb: 80
+training:
+  epochs: 60
+  batch_size: 16
+  gradient_accumulation: 2
+  optimizer: adamw
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  warmup_epochs: 2
+  scheduler: cosine
+  precision: bfloat16
+  seed_count: 20
+model:
+  vision_dim: 768
+  latent_dim: 512
+  text_dim: 512
+  cross_attention_heads: 8
+  cross_attention_layers: 4
+  vocabulary_size: 100
+evaluation:
+  bootstrap_iterations: 1000
+  alpha: 0.05
+  sites: 6
+  ordinal_grades: 4
+overrides:
+  polarity_probability: 0.25
+

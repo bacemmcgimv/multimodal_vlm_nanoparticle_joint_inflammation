@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+*.pt
+*.pth
+*.npy
+*.npz
+outputs/
+data/
+manifests/
+*.log
+.DS_Store

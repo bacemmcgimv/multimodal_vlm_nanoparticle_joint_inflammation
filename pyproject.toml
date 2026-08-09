@@ -1,0 +1,37 @@
+[build-system]
+requires = ["setuptools==70.3.0", "wheel==0.43.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lamss-vlm"
+version = "0.1.0"
+description = "Language-grounded ordinal scoring for volumetric knee MRI"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "numpy==1.26.4",
+  "open-clip-torch==2.24.0",
+  "pandas==2.2.2",
+  "PyYAML==6.0.2",
+  "scikit-learn==1.5.1",
+  "torch==2.3.1",
+]
+
+[project.scripts]
+lamss-train = "lamss_vlm.train:main"
+
+[tool.setuptools]
+package-dir = {"" = "code"}
+
+[tool.setuptools.packages.find]
+where = ["code"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+packages = ["lamss_vlm"]
+mypy_path = "code"

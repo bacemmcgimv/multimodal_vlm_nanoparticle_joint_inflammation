@@ -1,0 +1,47 @@
+data:
+  manifest: data/manifest.csv
+  volume_shape: [160, 160, 160]
+  spacing: [0.6, 0.6, 0.6]
+  channels: 3
+  workers: 16
+  train_fraction: 0.75
+  validation_fraction: 0.10
+  test_fraction: 0.15
+  train_sites: [0, 1, 2, 3, 4, 5]
+  validation_sites: [0, 1, 2, 3, 4, 5]
+  percentile_low: 1.0
+  percentile_high: 99.0
+model:
+  embed_dim: 768
+  latent_dim: 512
+  depths: [2, 2, 18, 2]
+  heads: [6, 12, 24, 48]
+  window_size: [6, 6, 6]
+  phrase_dim: 512
+  phrase_bank: data/moaks_phrases.pt
+  grade_counts:
+    hoffa: 4
+    effusion: 4
+    bml: 4
+training:
+  output_dir: runs/main
+  batch_size: 16
+  gradient_accumulation: 2
+  epochs: 60
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  warmup_steps: 2
+  gradient_clip: 1.0
+  precision: bfloat16
+  world_size: 4
+  seeds: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
+  seed: 0
+  beta_kl: 1.0
+  beta_text: 0.5
+  gamma_site: 1.0
+  site_estimator_steps: 1
+  optimizer: adamw
+  scheduler: cosine
+  vocabulary_boundaries: [30, 60]
+  vocabulary_sizes: [10, 25, 50]
+  polarity_probability: 0.25
